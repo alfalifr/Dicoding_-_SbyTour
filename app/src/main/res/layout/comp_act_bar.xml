@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimary"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/iv_back"
+        android:layout_toLeftOf="@id/iv_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="This is Action Bar"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/putih"/>
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_arrow"
+        android:tint="@color/putih"
+        app:tint="@color/putih"
+        android:rotation="90"/>
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_centerVertical="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="3dp"
+        android:src="@drawable/logo_bg_white_round_sm"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp" />
+
+    <ImageView
+        android:id="@+id/iv_option"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_hamburger"
+        android:tint="@color/putih"
+        app:tint="@color/putih"/>
+
+</RelativeLayout>

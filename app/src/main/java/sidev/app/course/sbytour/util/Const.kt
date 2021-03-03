@@ -6,6 +6,9 @@ object Const {
             "lon_min=112.57&lon_max=112.86&lat_min=%2D7.42&lat_max=%2D7.12" +
             "&format=json&apikey=$API_KEY,beginner"
 
+
+    const val DATA = "_data_"
+
     /*
     http://api.opentripmap.com/0.1/en/places/xid/Q372040?apikey=5ae2e3f221c38a28845f05b645835440c1a34ed1946319767a109462
 
