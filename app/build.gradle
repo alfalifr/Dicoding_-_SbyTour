@@ -43,9 +43,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 
-    implementation "sidev.lib.kotlin:KtStdLib-jvm:0.0.1x.11112020"
-    implementation "sidev.lib.android:AndroidStdLib:0.0.1x"
-    implementation "sidev.lib.android:SiFrame:0.0.1x"
+    implementation "sidev.lib.kotlin:ktstdlib-jvm:0.0.1x.11112020"
+    implementation "sidev.lib.android:androidstdlib:0.0.1x"
+    implementation "sidev.lib.android:siframe:0.0.1x"
 
     //implementation "sidev.lib.kotlin:KtStdLib:0.0.1x.11112020"
 }
