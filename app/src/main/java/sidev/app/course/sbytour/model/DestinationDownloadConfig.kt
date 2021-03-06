@@ -2,6 +2,7 @@ package sidev.app.course.sbytour.model
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import java.io.Serializable
 
 data class DestinationDownloadConfig(
     val lifecycleOwner: LifecycleOwner,

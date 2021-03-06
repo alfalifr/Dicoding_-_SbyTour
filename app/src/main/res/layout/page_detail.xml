@@ -1,158 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
+    android:id="@+id/sv"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_display"
+    <RelativeLayout
+        android:id="@+id/rl_1"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:src="@color/colorPrimaryDark" />
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_display"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:background="@color/abuLebihTua"/>
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_below="@id/iv_display"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="This is Destination Name"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_kind"
-        android:layout_below="@id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="This is the kind"
-        android:textSize="18sp" />
-
-    <TableLayout
-        android:id="@+id/tbl"
-        android:layout_below="@id/tv_kind"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-
-        <TableRow
+        <RelativeLayout
+            android:id="@+id/rl_content"
+            android:layout_below="@id/iv_display"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp">
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="This is Destination Name"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_kind"
+                android:layout_below="@id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="This is the kind"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_star"
+                android:layout_below="@id/tv_kind"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/ic_star"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/ic_star"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/ic_star"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/ic_star"/>
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/ic_star"/>
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/tbl"
+                android:layout_below="@id/ll_star"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp">
+
+                <!--
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="City"
+                        android:textSize="15sp"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:id="@+id/tv_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the city"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="Province"
+                        android:textSize="15sp"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:id="@+id/tv_province"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the province"
+                        android:textSize="15sp" />
+                </TableRow>
+                -->
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="Address"
+                        android:textSize="15sp"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:id="@+id/tv_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the address"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="Village"
+                        android:textSize="15sp"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:id="@+id/tv_village"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the village"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="Postcode"
+                        android:textSize="15sp"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:id="@+id/tv_postcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="This is the postcode"
+                        android:textSize="15sp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="Website"
+                        android:textSize="15sp"
+                        android:layout_column="1"/>
+                    <TextView
+                        android:id="@+id/tv_web"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minWidth="300dp"
+                        android:minLines="2"
+                        android:text="This is the website"
+                        android:textSize="15sp" />
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_below="@id/tbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_marginRight="10dp"
-                android:text="Village"
-                android:textSize="15sp"
-                android:layout_column="1"/>
-            <TextView
-                android:id="@+id/tv_village"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is the village"
-                android:textSize="15sp" />
-        </TableRow>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_desc_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/tv_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minLines="10"
+                    android:layout_marginTop="10dp"
+                    android:text="This is the description"
+                    android:textSize="15sp"/>
+            </LinearLayout>
+        </RelativeLayout>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="City"
-                android:textSize="15sp"
-                android:layout_column="1"/>
-            <TextView
-                android:id="@+id/tv_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is the city"
-                android:textSize="15sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="Province"
-                android:textSize="15sp"
-                android:layout_column="1"/>
-            <TextView
-                android:id="@+id/tv_province"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is the province"
-                android:textSize="15sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="Address"
-                android:textSize="15sp"
-                android:layout_column="1"/>
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is the address"
-                android:textSize="15sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="Website"
-                android:textSize="15sp"
-                android:layout_column="1"/>
-            <TextView
-                android:id="@+id/tv_web"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is the website"
-                android:textSize="15sp" />
-        </TableRow>
-
-    </TableLayout>
-
-    <LinearLayout
-        android:layout_below="@id/tbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_desc_header"
+        <ProgressBar
+            android:id="@+id/pb"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="This is the description"
-            android:textSize="15sp"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>
