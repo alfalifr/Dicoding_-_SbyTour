@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.core.text.HtmlCompat
 import androidx.core.view.children
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.page_detail.*
 import kotlinx.android.synthetic.main.page_detail.view.*
 import org.jetbrains.anko.textColorResource
@@ -21,7 +22,7 @@ import sidev.lib.check.isNull
 import sidev.lib.exception.IllegalArgExc
 
 class DetailFrag: StdFrag() {
-    override var actBarTitle: String = "Detail Destinasi"
+    override var actBarTitle: String = "Destination Detail"
         private set
     override val layoutId: Int = R.layout.page_detail
 
@@ -117,7 +118,10 @@ class DetailFrag: StdFrag() {
                             requestLayout()
                             invalidate()
                         }
-                        Glide.with(context!!).load(data.imgUrl).into(iv_display)
+                        Glide.with(context!!)
+                            .load(data.imgUrl)
+                            .apply(RequestOptions().error(R.drawable.ic_warning))
+                            .into(iv_display)
                         setStar(data.rating)
 
                         rl_content.apply {

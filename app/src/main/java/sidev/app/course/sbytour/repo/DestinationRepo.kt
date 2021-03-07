@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.runOnUiThread
+import org.jetbrains.anko.toast
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -16,10 +17,9 @@ import sidev.app.course.sbytour.model.DestinationDownloadConfig
 import sidev.app.course.sbytour.util.Const
 import sidev.lib.android.std.tool.util.`fun`.loge
 import sidev.lib.check.asNotNull
+import sidev.lib.check.isNull
 import sidev.lib.jvm.tool.`fun`.contentLengthLong_
 import sidev.lib.jvm.tool.`fun`.readStreamBufferByte
-import java.lang.Exception
-import java.lang.reflect.InvocationTargetException
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -33,7 +33,7 @@ class DestinationRepo(val frag: Fragment) {
     /**
      * Returns pair of url contentLength and dataList.
      */
-    fun getPlacesList(limit: Int = 20): DestinationDownloadConfig {
+    fun getPlacesList(limit: Int = 26): DestinationDownloadConfig {
         val contentLength= MutableLiveData<Int>()
         val currentProgress= MutableLiveData<Pair<Long, Long>>()
         val dataList= MutableLiveData<ArrayList<Destination>>()
@@ -41,32 +41,37 @@ class DestinationRepo(val frag: Fragment) {
         //contentLength.observe()
         doAsync {
             val url= URL(Const.apiPlacesLimitTo(limit))
-            url.openConnection().asNotNull { it: HttpURLConnection ->
-                val length= it.contentLengthLong_.toInt()
-                ctx.runOnUiThread { contentLength.value = length }
+            try {
+                url.openConnection().asNotNull { it: HttpURLConnection ->
+                    val length= it.contentLengthLong_.toInt()
+                    ctx.runOnUiThread { contentLength.value = length }
 
-                for(header in it.headerFields){
-                    loge("getPlacesList() header= $header")
-                }
-
-                val byteBuffer = ByteArray(20)
-                val byteList= ArrayList<Byte>(
-                    if(length > 0) length else 200
-                )
-
-                it.readStreamBufferByte(byteBuffer) { readByteLen, current, len ->
-                    byteList += byteBuffer.asList()
-                    if(len > 0){
-                        ctx.runOnUiThread { currentProgress.value= current to len }
+                    for(header in it.headerFields){
+                        loge("getPlacesList() header= $header")
                     }
+
+                    val byteBuffer = ByteArray(20)
+                    val byteList= ArrayList<Byte>(
+                        if(length > 0) length else 200
+                    )
+
+                    it.readStreamBufferByte(byteBuffer) { readByteLen, current, len ->
+                        byteList += byteBuffer.asList()
+                        if(len > 0){
+                            ctx.runOnUiThread { currentProgress.value= current to len }
+                        }
+                    }
+                    val byteArrComplete= byteList.toByteArray()
+                    val responseStr= String(byteArrComplete, Charsets.UTF_8) //.decodeToString()
+                    loge("getPlacesList() byteArrComplete.size= ${byteArrComplete.size} byteList.size= ${byteList.size} responseStr= $responseStr")
+                    //loge("responseStr[8197]= ${responseStr[8197]}")
+                    //loge("responseStr.substring(8190, 8198)= ${responseStr.substring(8190, 8198)}")
+                    //loge("responseStr.substring(8194)= ${responseStr.substring(8194)}")
+                    responseStr.toDestinationList(dataList)
                 }
-                val byteArrComplete= byteList.toByteArray()
-                val responseStr= String(byteArrComplete, Charsets.UTF_8) //.decodeToString()
-                loge("getPlacesList() byteArrComplete.size= ${byteArrComplete.size} byteList.size= ${byteList.size} responseStr= $responseStr")
-                //loge("responseStr[8197]= ${responseStr[8197]}")
-                //loge("responseStr.substring(8190, 8198)= ${responseStr.substring(8190, 8198)}")
-                //loge("responseStr.substring(8194)= ${responseStr.substring(8194)}")
-                responseStr.toDestinationList(dataList)
+            } catch(e: java.net.ConnectException) {
+                ctx.toast("Connection error has occured,\nkind= ${e::class}\nmsg= ${e.message}")
+                loge("Connection error has occured", e)
             }
         }
         return DestinationDownloadConfig(
@@ -105,32 +110,37 @@ class DestinationRepo(val frag: Fragment) {
         doAsync {
             val urlStr= Const.API_PLACE_DETAIL.replace("{id}", id)
             val url= URL(urlStr)
-            url.openConnection().asNotNull { it: HttpURLConnection ->
-                val length= it.contentLengthLong_.toInt()
-                ctx.runOnUiThread { contentLength.value = length }
+            try {
+                url.openConnection().asNotNull { it: HttpURLConnection ->
+                    val length= it.contentLengthLong_.toInt()
+                    ctx.runOnUiThread { contentLength.value = length }
 
-                val byteBuffer = ByteArray(20)
-                val byteList= ArrayList<Byte>(
-                    if(length > 0) length else 200
-                )
+                    val byteBuffer = ByteArray(20)
+                    val byteList= ArrayList<Byte>(
+                        if(length > 0) length else 200
+                    )
 
-                it.readStreamBufferByte(byteBuffer) { _, _, _ ->
-                    byteList += byteBuffer.asList()
-                }
-                val responseStr= byteList.toByteArray().decodeToString()
-                loge("getDestinationDetail() urlStr= $urlStr")
-                loge("getDestinationDetail() responseStr= $responseStr")
-                ctx.runOnUiThread {
-                    try {
-                        data.value= responseStr.toDestinationDetail()
-                    } catch (e: JSONException){
-                        if(e.message?.startsWith("End of input at character", true) != true)
-                            throw e
-                        else {
-                            loge("Error timeout", e)
+                    it.readStreamBufferByte(byteBuffer) { _, _, _ ->
+                        byteList += byteBuffer.asList()
+                    }
+                    val responseStr= byteList.toByteArray().decodeToString()
+                    //loge("getDestinationDetail() urlStr= $urlStr")
+                    loge("getDestinationDetail() responseStr= $responseStr")
+                    ctx.runOnUiThread {
+                        try {
+                            data.value= responseStr.toDestinationDetail()
+                        } catch (e: JSONException){
+                            if(e.message?.startsWith("End of input at character", true) != true)
+                                throw e
+                            else {
+                                loge("Error timeout", e)
+                            }
                         }
                     }
                 }
+            } catch (e: java.net.ConnectException) {
+                ctx.toast("Connection error has occured,\nkind= ${e::class}\nmsg= ${e.message}")
+                loge("Connection error has occured", e)
             }
         }
 
@@ -142,7 +152,7 @@ class DestinationRepo(val frag: Fragment) {
         val id= json.getString("xid")
         val name= json.getString("name")
         val kind= json.getString("kinds")
-            .removeSuffix(",interesting_places")
+            //.removeSuffix(",interesting_places")
             .split(",")
             .joinToString().also {
                 loge("toDestinationDetail() it= $it")
@@ -179,15 +189,13 @@ class DestinationRepo(val frag: Fragment) {
     }
 
     fun getPlaceImg(id: String) : LiveData<String> {
-        val data= MutableLiveData<String>()
-        doAsync {
-            getDestinationDetail(id).data.observe(frag) {
-                if(it != null) ctx.runOnUiThread {
-                    data.value= it.imgUrl
-                }
-
+        val res= MutableLiveData<String>()
+        getDestinationDetail(id).data.observe(frag) {
+            loge("getPlaceImg() HASIL id= $id it= $it")
+            if(it != null) ctx.runOnUiThread {
+                res.value= it.imgUrl
             }
         }
-        return data
+        return res
     }
 }

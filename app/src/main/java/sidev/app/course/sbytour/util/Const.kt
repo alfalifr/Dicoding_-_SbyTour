@@ -7,6 +7,7 @@ object Const {
             "&format=json&apikey=$API_KEY"
     const val API_PLACE_DETAIL = "https://api.opentripmap.com/0.1/en/places/xid/" +
             "{id}?apikey=$API_KEY"
+    const val API_DOC_WEB= "https://opentripmap.io/"
 
     fun apiPlacesLimitTo(limit: Int): String = "$API_PLACES&limit=$limit"
 

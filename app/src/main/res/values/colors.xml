@@ -2,9 +2,11 @@
 <resources>
     <color name="colorPrimaryVariant">@color/purple_700</color>
     <color name="colorPrimaryDark">@color/colorPrimaryVariant</color>
-    <color name="colorPrimary">@color/purple_500</color>
+    <color name="colorPrimary">@color/blueMain</color>
     <color name="colorAccent">@color/colorOnPrimary</color>
     <color name="colorOnPrimary">@color/white</color>
+
+    <color name="blueMain">#031CFC</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

@@ -12,9 +12,10 @@ import sidev.lib.android.std.tool.util.`fun`.imgRes
 import sidev.lib.android.std.tool.util.`fun`.loge
 
 class ListFrag: StdFrag() {
-    override val actBarTitle: String = "Daftar Destinasi"
+    override val actBarTitle: String = "Destination List"
     override val layoutId: Int = R.layout.page_list
-    override val isLogoAvailable: Boolean = false
+    override val isLogoAvailable: Boolean = true
+    override val isBackAvailable: Boolean = false
     override val isOptionAvailable: Boolean = true
 
     private lateinit var adp: DestinationAdp
